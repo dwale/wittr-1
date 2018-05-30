@@ -9,7 +9,21 @@ export default function IndexController(container) {
   this._lostConnectionToast = null;
   this._openSocket();
 }
+IndexController.prototype._registerServiceWorker = function () {
+    // navigator.serviceWorker.register('/sw.js').then(function(reg){
+    //     console.log('Yay!', reg);
+    // }). catch(function(err) {
+    //     console.log('Boo!',err);
+    // });
 
+    if (!navigator.serviceWorker) return;
+    navigator.serviceWorker.register('/sw.js').then(function (reg) {
+        console.log('Reg Worked', reg);
+
+    }).catch(function(){
+        console.log('Reg failed');
+    });
+};
 // open a connection to the server for live updates
 IndexController.prototype._openSocket = function() {
   var indexController = this;
